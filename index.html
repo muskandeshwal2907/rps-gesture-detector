@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Play Rock-Paper-Scissors using real-time hand gesture detection powered by MediaPipe Gesture Recognizer and your webcam."
+    />
+    <title>RPS Gesture Detector — Rock, Paper, Scissors with MediaPipe</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Background blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-icon">✊</div>
+        <h1 class="title">RPS Gesture Detector</h1>
+        <p class="subtitle">Show your hand — beat the computer</p>
+      </header>
+
+      <!-- Status bar -->
+      <div id="status-bar" class="status-bar status-loading">
+        <span class="status-dot"></span>
+        <span id="status-text">Loading MediaPipe model…</span>
+      </div>
+
+      <!-- Main game area -->
+      <main class="game-area">
+        <!-- Video panel -->
+        <section class="video-panel glass-card">
+          <div class="panel-label">📷 Your Camera</div>
+          <div class="video-wrapper">
+            <video id="webcam" autoplay playsinline muted></video>
+            <canvas id="overlay-canvas"></canvas>
+            <!-- Gesture badge overlaid on video -->
+            <div id="gesture-badge" class="gesture-badge hidden">
+              <span id="gesture-emoji" class="gesture-emoji">✊</span>
+              <span id="gesture-label" class="gesture-label">Rock</span>
+            </div>
+          </div>
+
+          <!-- Detected gesture below video -->
+          <div class="detected-row">
+            <span class="detected-prefix">Detected:</span>
+            <span id="detected-text" class="detected-value">—</span>
+          </div>
+        </section>
+
+        <!-- VS divider + computer panel -->
+        <div class="center-column">
+          <div class="vs-badge">VS</div>
+          <div id="result-box" class="result-box glass-card hidden">
+            <div id="result-icon" class="result-icon">🤝</div>
+            <div id="result-text" class="result-text">Tie!</div>
+          </div>
+        </div>
+
+        <!-- Computer panel -->
+        <section class="computer-panel glass-card">
+          <div class="panel-label">🤖 Computer</div>
+          <div class="computer-display">
+            <div id="computer-emoji" class="computer-move-emoji">❓</div>
+            <div id="computer-move" class="computer-move-label">Waiting…</div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Score board -->
+      <div class="scoreboard glass-card">
+        <div class="score-item">
+          <div class="score-num" id="score-player">0</div>
+          <div class="score-label">You</div>
+        </div>
+        <div class="score-divider"></div>
+        <div class="score-item">
+          <div class="score-num tie" id="score-tie">0</div>
+          <div class="score-label">Ties</div>
+        </div>
+        <div class="score-divider"></div>
+        <div class="score-item">
+          <div class="score-num computer" id="score-computer">0</div>
+          <div class="score-label">Computer</div>
+        </div>
+      </div>
+
+      <!-- Instructions / hint -->
+      <div id="hint-card" class="hint-card glass-card">
+        <p>
+          Hold a gesture steady for <strong>1 second</strong> to lock in your
+          move. ✊ Fist = Rock &nbsp;|&nbsp; 🖐 Palm = Paper &nbsp;|&nbsp; ✌️
+          Two fingers = Scissors
+        </p>
+      </div>
+
+      <!-- Reset button -->
+      <button id="reset-btn" class="reset-btn" aria-label="Reset score">
+        ↺ Reset Score
+      </button>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
